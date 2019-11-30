@@ -20,17 +20,17 @@ namespace eazy_transact.Controllers
         public ActionResult<List<User>> Get() => 
             _userService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetUser")]
-        public ActionResult<User> Get(string id)
+        [HttpPost("{user}")]
+        public ActionResult<User> Get(User user)
         {
-            var user = _userService.Get(id);
-
-            if (user == null)
+            var userData = _userService.Get(user.Email);
+        
+            if (userData == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return userData;
         }
 
         [HttpPost]
